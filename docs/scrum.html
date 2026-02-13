@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notas de Clase: SCRUM & Engineering</title>
+
+    <style>
+
+        :root {
+
+            --bg-color: #fdfaf6;
+
+            --primary: #fcf4dd; /* Rosa pastel */
+
+            --secondary: #e2f0cb; /* Verde pastel */
+
+            --accent: #fcf4dd; /* Crema pastel */
+
+            --info: #dcf2ff; /* Celeste pastel */
+
+            --mapping: #f0e1ff; /* Lavanda pastel */
+
+            --text-color: #555;
+
+            --white: #ffffff;
+
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+        }
+
+
+
+        body {
+
+            font-family: 'Segoe UI', sans-serif;
+
+            background-color: var(--bg-color);
+
+            color: var(--text-color);
+
+            line-height: 1.6;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+
+        header {
+
+            background-color: var(--primary);
+
+            padding: 2.5rem;
+
+            text-align: center;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            background: var(--white);
+
+            padding: 12px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            z-index: 1000;
+
+            box-shadow: var(--shadow);
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        nav a {
+
+            text-decoration: none;
+
+            color: #777;
+
+            font-weight: 600;
+
+            font-size: 0.85rem;
+
+            padding: 8px 15px;
+
+            border-radius: 12px;
+
+            transition: all 0.3s;
+
+        }
+
+
+
+        nav a:hover {
+
+            background-color: var(--primary);
+
+            color: white;
+
+        }
+
+
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: 2rem auto;
+
+            padding: 0 20px;
+
+        }
+
+
+
+        section {
+
+            background: var(--white);
+
+            margin-bottom: 2.5rem;
+
+            padding: 2.5rem;
+
+            border-radius: 20px;
+
+            box-shadow: var(--shadow);
+
+            border-top: 6px solid var(--primary);
+
+        }
+
+
+
+        h2 {
+
+            color: #d881a7;
+
+            border-bottom: 2px solid var(--accent);
+
+            padding-bottom: 10px;
+
+        }
+
+
+
+        h3 { color: #888; margin-top: 1.5rem; }
+
+
+
+        .roles-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 20px;
+
+            margin: 20px 0;
+
+        }
+
+
+
+        .role-card {
+
+            background: var(--info);
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            border: 1px solid #e1f0ff;
+
+            text-align: center;
+
+        }
+
+
+
+        .example-box {
+
+            background-color: #fafafa;
+
+            border: 1px solid #eee;
+
+            padding: 15px;
+
+            border-left: 5px solid var(--accent);
+
+            margin: 15px 0;
+
+        }
+
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 20px 0;
+
+        }
+
+
+
+        th, td {
+
+            padding: 12px;
+
+            border-bottom: 1px solid #f0f0f0;
+
+            text-align: left;
+
+        }
+
+
+
+        th { background-color: var(--accent); color: #886d1d; }
+
+
+
+        .hierarchy-box {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            margin: 20px 0;
+
+        }
+
+
+
+        .h-item {
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+
+        .h-epic { background-color: #f9d5e5; width: 100%; }
+
+        .h-story { background-color: #dcf2ff; width: 85%; margin-left: 5%; }
+
+        .h-act { background-color: #fcf4dd; width: 70%; margin-left: 10%; }
+
+
+
+        .scrum-process {
+
+            background: #fff9fb;
+
+            border: 2px dashed #f9d5e5;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            margin-top: 10px;
+
+        }
+
+
+
+        footer {
+
+            text-align: center;
+
+            padding: 3rem;
+
+            color: #bbb;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+<header>
+
+    <h1>Ingeniería de Software Ágil</h1>
+
+    <p>Roles, Historias de Usuario y Artefactos en SCRUM</p>
+
+</header>
+
+
+
+<nav>
+
+    <a href="#roles">Roles</a>
+
+    <a href="#hu">Historias de Usuario</a>
+
+    <a href="#mapping">User Story Mapping</a>
+
+    <a href="#eventos">Eventos</a>
+
+    <a href="#artefactos">Artefactos</a>
+
+</nav>
+
+
+
+<div class="container">
+
+
+
+    <section id="roles">
+
+        <h2>1. Roles en el Scrum Team</h2>
+
+        <div class="roles-grid">
+
+            <div class="role-card">
+
+                <strong>Product Owner (PO)</strong>
+
+                <p><small>Maximiza el valor del producto y gestiona el Product Backlog.</small></p>
+
+            </div>
+
+            <div class="role-card" style="background: var(--secondary);">
+
+                <strong>Scrum Master</strong>
+
+                <p><small>Líder que sirve al equipo y elimina impedimentos.</small></p>
+
+            </div>
+
+            <div class="role-card" style="background: var(--mapping);">
+
+                <strong>Team</strong>
+
+                <p><small>Personas comprometidas a crear el Incremento útil cada Sprint.</small></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section id="hu" style="border-top: 6px solid var(--info);">
+
+        <h2>2. Historias de Usuario (HU)</h2>
+
+        <p>Breve descripción de una funcionalidad contada desde la perspectiva del usuario.</p>
+
+        
+
+        
+
+        <h3>Buenas Prácticas (Modelo INVEST)</h3>
+
+        <ul>
+
+            <li><strong>I</strong>ndependiente, <strong>N</strong>egociable, <strong>V</strong>aliosa, <strong>E</strong>stimable, <strong>S</strong>mall (Pequeña), <strong>T</strong>esteable.</li>
+
+            <li>Utilizar la estructura: "Como [rol], quiero [acción], para [beneficio]".</li>
+
+        </ul>
+
+
+
+        <div class="example-box">
+
+            <strong>Ejemplos:</strong>
+
+            <ol>
+
+                <li>Como <em>Cliente</em>, quiero <em>filtrar productos por precio</em>, para <em>encontrar lo que se ajuste a mi presupuesto</em>.</li>
+
+                <li>Como <em>Administrador</em>, quiero <em>suspender cuentas de usuario</em>, para <em>mantener la seguridad de la plataforma</em>.</li>
+
+                <li>Como <em>Vendedor</em>, quiero <em>ver un historial de mis ventas</em>, para <em>llevar control de mis comisiones</em>.</li>
+
+            </ol>
+
+        </div>
+
+
+
+        <h3>Plantilla de Documentación de HU</h3>
+
+        <table>
+
+            <tr>
+
+                <th colspan="2" style="background-color: var(--accent);">HU-05: Filtrado de Productos</th>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Como:</strong> Cliente</td>
+
+                <td><strong>Quiero:</strong> Filtrar por categorías</td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="2"><strong>Para:</strong> No perder tiempo viendo productos que no me interesan.</td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="2">
+
+                    <strong>Criterios de Aceptación:</strong><br>
+
+                    - El sistema muestra un menú lateral con las categorías disponibles.<br>
+
+                    - Al seleccionar una categoría, la lista de productos se actualiza instantáneamente.
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+
+    <section id="mapping" style="border-top: 6px solid var(--mapping);">
+
+        <h2>3. User Story Mapping</h2>
+
+        <p>Técnica visual que toma como insumo los <strong>Requisitos Funcionales y No Funcionales</strong>.</p>
+
+        
+
+        <div class="hierarchy-box">
+
+            <div class="h-item h-epic">
+
+                <span>1. Épica</span>
+
+                <small>Nivel Estratégico / Gran funcionalidad</small>
+
+            </div>
+
+            <div class="h-item h-story">
+
+                <span>2. Historia de Usuario</span>
+
+                <small>Nivel de Valor / Entregable del Sprint</small>
+
+            </div>
+
+            <div class="h-item h-act">
+
+                <span>3. Actividad / Tarea</span>
+
+                <small>Nivel Operativo / Desglose técnico</small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section id="eventos">
+
+        <h2>4. Eventos (Ceremonias)</h2>
+
+        <p>Son bloques de tiempo (time-boxed) diseñados para crear regularidad y minimizar reuniones no definidas.</p>
+
+
+
+        <h3>Documentación en Tabla de Eventos</h3>
+
+        <table>
+
+            <tr>
+
+                <th>Evento</th>
+
+                <th>Duración Máx.</th>
+
+                <th>Propósito Principal</th>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Sprint</strong></td>
+
+                <td>1 mes o menos</td>
+
+                <td>Contenedor de todos los demás eventos. Creación del Incremento.</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Sprint Planning</strong></td>
+
+                <td>8h (Sprint 1 mes)</td>
+
+                <td>¿Qué se hará y cómo se hará en este Sprint?</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Daily Scrum</strong></td>
+
+                <td>15 min</td>
+
+                <td>Inspeccionar el progreso hacia el Sprint Goal y ajustar el plan diario.</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Sprint Review</strong></td>
+
+                <td>4h (Sprint 1 mes)</td>
+
+                <td>Presentar resultados a los interesados y colaborar en qué hacer después.</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+
+    <section id="artefactos" style="border-top: 6px solid var(--info);">
+
+        <h2>5. Artefactos y sus Compromisos</h2>
+
+        <p>Representan trabajo o valor para proporcionar transparencia.</p>
+
+
+
+        <div class="scrum-process">
+
+            <strong>1. Product Backlog:</strong> Lista ordenada de todo lo que se conoce que es necesario en el producto. (Compromiso: <em>Product Goal</em>).<br><br>
+
+            <strong>2. Sprint Backlog:</strong> Conjunto de elementos del Product Backlog seleccionados para el Sprint. (Compromiso: <em>Sprint Goal</em>).<br><br>
+
+            <strong>3. Incremento:</strong> La suma de todos los elementos del Product Backlog completados durante el Sprint. (Compromiso: <em>Definition of Done</em>).
+
+        </div>
+
+
+
+        <h3>Ejemplos de Aplicación</h3>
+
+        <div class="example-box">
+
+            <ul>
+
+                <li><strong>Product Goal:</strong> "Llegar a 10,000 usuarios activos en la app móvil para fin de año".</li>
+
+                <li><strong>Sprint Goal:</strong> "Habilitar el proceso de registro mediante redes sociales".</li>
+
+                <li><strong>Definition of Done (DoD):</strong> "Código revisado, pruebas unitarias al 100% y documentación técnica actualizada".</li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+
+</div>
+
+
+
+<footer>
+
+    Notas de Clase Ágiles &copy; 2026 - Universidad de Desarrollo
+
+</footer>
+
+
+
+</body>
+
+</html>

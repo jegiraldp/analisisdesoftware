@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas de Clase: Ingeniería de Requisitos</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --primary: #b2cecf; /* Menta pastel */
+            --secondary: #d1cfe2; /* Lavanda pastel */
+            --accent: #f0e1ff;
+            --text-color: #4a4a4a;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--accent);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--white);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 8px solid var(--secondary);
+        }
+
+        h2 {
+            color: #6a6a6a;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        h3 { color: #8a8a8a; }
+
+        ul { padding-left: 20px; }
+
+        .example-box {
+            background-color: #fdfdfd;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--white);
+        }
+
+        th, td {
+            border: 1px solid #eee;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--secondary);
+        }
+
+        .crc-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .crc-header {
+            background: var(--primary);
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .crc-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .crc-column {
+            padding: 10px;
+            min-height: 100px;
+        }
+
+        .crc-column:first-child { border-right: 1px solid #ddd; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Interacción JS simple */
+        .highlight {
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Guía de Ingeniería de Software</h1>
+    <p>Requisitos, Historias de Usuario y Tarjetas CRC</p>
+</header>
+
+<nav>
+    <a href="#rf">Funcionales</a>
+    <a href="#rnf">No Funcionales</a>
+    <a href="#hu">Historias de Usuario</a>
+    <a href="#crc">Tarjetas CRC</a>
+</nav>
+
+<div class="container">
+
+    <section id="rf">
+        <h2>1. Requisitos Funcionales (RF)</h2>
+        <p>Definen lo que el sistema <strong>debe hacer</strong>. Describen las funciones, servicios o tareas específicas.</p>
+        
+        <h3>Buenas Prácticas</h3>
+        <ul>
+            <li>Usar lenguaje claro: "El sistema debe [acción]".</li>
+            <li>Ser atómico: Un requisito por frase.</li>
+            <li>Evitar ambigüedades (palabras como "rápido" o "fácil").</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Ejemplos:</strong>
+            <ol>
+                <li>El sistema permitirá al usuario recuperar su contraseña mediante correo electrónico.</li>
+                <li>El sistema generará un reporte mensual de ventas en formato PDF.</li>
+                <li>El sistema debe validar que el stock sea mayor a cero antes de confirmar una compra.</li>
+            </ol>
+        </div>
+
+        <h3>Documentación en Tabla</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Prioridad</th>
+            </tr>
+            <tr>
+                <td>RF-01</td>
+                <td>Login de Usuario</td>
+                <td>Permitir el ingreso mediante usuario y clave única.</td>
+                <td>Alta</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="rnf">
+        <h2>2. Requisitos No Funcionales (RNF)</h2>
+        <p>Definen <strong>cómo</strong> debe funcionar el sistema (restricciones o cualidades de calidad).</p>
+        
+        <h3>Buenas Prácticas</h3>
+        <ul>
+            <li>Deben ser medibles (verificables).</li>
+            <li>Relacionarlos con atributos de calidad (seguridad, rendimiento, usabilidad).</li>
+            <li>Definir rangos aceptables.</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Ejemplos:</strong>
+            <ol>
+                <li><strong>Rendimiento:</strong> Las consultas a la base de datos deben responder en menos de 2 segundos.</li>
+                <li><strong>Seguridad:</strong> Todas las contraseñas deben estar encriptadas bajo el estándar AES-256.</li>
+                <li><strong>Disponibilidad:</strong> El sistema debe estar operativo el 99.9% del tiempo anual.</li>
+            </ol>
+        </div>
+
+        <h3>Documentación en Tabla</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Categoría</th>
+                <th>Restricción / Métrica</th>
+            </tr>
+            <tr>
+                <td>RNF-01</td>
+                <td>Usabilidad</td>
+                <td>Un usuario nuevo debe aprender a usar la función de búsqueda en < 10 minutos.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="hu">
+        <h2>3. Historias de Usuario (HU)</h2>
+        <p>Breve descripción de una funcionalidad contada desde la perspectiva del usuario.</p>
+        
+        <h3>Buenas Prácticas (Modelo INVEST)</h3>
+        <ul>
+            <li><strong>I</strong>ndependiente, <strong>N</strong>egociable, <strong>V</strong>aliosa, <strong>E</strong>stimalble, <strong>S</strong>mall (Pequeña), <strong>T</strong>esteable.</li>
+            <li>Utilizar la estructura: "Como [rol], quiero [acción], para [beneficio]".</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Ejemplos:</strong>
+            <ol>
+                <li>Como <em>Cliente</em>, quiero <em>filtrar productos por precio</em>, para <em>encontrar lo que se ajuste a mi presupuesto</em>.</li>
+                <li>Como <em>Administrador</em>, quiero <em>suspender cuentas de usuario</em>, para <em>mantener la seguridad de la plataforma</em>.</li>
+                <li>Como <em>Vendedor</em>, quiero <em>ver un historial de mis ventas</em>, para <em>llevar control de mis comisiones</em>.</li>
+            </ol>
+        </div>
+
+        <h3>Plantilla de Documentación de HU</h3>
+        <table>
+            <tr>
+                <th colspan="2" style="background-color: var(--accent);">HU-05: Filtrado de Productos</th>
+            </tr>
+            <tr>
+                <td><strong>Como:</strong> Cliente</td>
+                <td><strong>Quiero:</strong> Filtrar por categorías</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Para:</strong> No perder tiempo viendo productos que no me interesan.</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>Criterios de Aceptación:</strong><br>
+                    - El sistema muestra un menú lateral con las categorías disponibles.<br>
+                    - Al seleccionar una categoría, la lista de productos se actualiza instantáneamente.
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="crc">
+        <h2>4. Tarjetas CRC (Class, Responsibility, Collaboration)</h2>
+        <p>Técnica de diseño orientado a objetos para identificar clases y sus interacciones.</p>
+        
+        <h3>Buenas Prácticas</h3>
+        <ul>
+            <li>Mantener las responsabilidades a un alto nivel (no métodos detallados).</li>
+            <li>Si una clase tiene demasiadas responsabilidades, considerar dividirla.</li>
+            <li>Realizar sesiones grupales de "role-playing" para validar flujos.</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Ejemplos de Clases:</strong>
+            <ol>
+                <li><strong>Pedido:</strong> Calcula el total, valida stock. Colabora con Producto y Cliente.</li>
+                <li><strong>Carrito:</strong> Almacena ítems temporalmente. Colabora con Producto.</li>
+                <li><strong>Usuario:</strong> Gestiona perfil y autenticación.</li>
+            </ol>
+        </div>
+
+        <h3>Ejemplo Visual de Tarjeta CRC</h3>
+        <div class="crc-card">
+            <div class="crc-header">Clase: Factura</div>
+            <div class="crc-body">
+                <div class="crc-column">
+                    <strong>Responsabilidades</strong>
+                    <ul>
+                        <li>Calcular impuestos</li>
+                        <li>Generar número único</li>
+                        <li>Almacenar fecha</li>
+                    </ul>
+                </div>
+                <div class="crc-column">
+                    <strong>Colaboradores</strong>
+                    <ul>
+                        <li>Cliente</li>
+                        <li>LíneaDetalle</li>
+                        <li>ImpuestosService</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    Material de Apoyo Académico &copy; 2026 - Ingeniería de Software
+</footer>
+
+<script>
+    // Efecto de resaltado al hacer scroll
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(sec => {
+            const top = window.scrollY;
+            const offset = sec.offsetTop - 150;
+            const height = sec.offsetHeight;
+            
+            if (top >= offset && top < offset + height) {
+                sec.style.transform = "scale(1.01)";
+                sec.style.transition = "transform 0.3s ease";
+            } else {
+                sec.style.transform = "scale(1)";
+            }
+        });
+    });
+
+    console.log("Notas de clase cargadas correctamente.");
+</script>
+
+</body>
+</html>
